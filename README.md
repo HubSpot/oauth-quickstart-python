@@ -1,4 +1,4 @@
-# HubSpot QuickStart using Python + OAUTH
+# HubSpot OAUTH QuickStart using Python
 
 Follow these steps to create a simple Python command-line app that makes requests to HubSpot's APIs.
 
