@@ -2,8 +2,8 @@
 LOCAL/
 .html
 .DS_Store
-.pickle
 .env
+*.pickle
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
