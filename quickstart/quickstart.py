@@ -17,10 +17,18 @@ from requests_oauthlib import OAuth2Session
 import os
 import pickle
 import json
+import os
+from dotenv import load_dotenv
 
-# Replace with your App's Client ID and Secret
-CLIENT_ID     = 'your-app-client-id'
-CLIENT_SECRET = 'your-app-client-secret'
+# Recommended (More secure) - Create a .env file to store your Client ID and Secret,
+#                             which is then read into this app. 
+load_dotenv()
+CLIENT_ID     = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')  
+
+# Alternative (Less secure) - App your App's credentials 
+# CLIENT_ID     = None # Replace with 'your-app-client-id'
+# CLIENT_SECRET = None # Replace with 'your-app-client-secret'
 
 # If modifying these scopes, delete the file hstoken.pickle.
 SCOPES        = ['contacts']
@@ -33,6 +41,10 @@ def main():
     Connects your app a Hub, then fetches the first Contact in the CRM.
     Note: If you want to change hubs or scopes, delete the `hstoken.pickle` file and rerun.
     """
+    
+    # Check if Client ID and Secret are set
+    VerifyAppSettings()
+
     app_config = {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,
@@ -75,6 +87,18 @@ def main():
     
 #===================================================================
 #==== Supporting Functions and Classes used by the command-line app. 
+
+def VerifyAppSettings():
+    """
+    Check if CLIENT_ID and CLIENT_SECRET are set.
+    If not, present the error and exit().
+    """
+    try:
+        if not (CLIENT_ID and CLIENT_SECRET):
+            raise ValueError("CLIENT_ID or CLIENT_SECRET empty.  Check your .env file or set values in quickstart.py directly.")
+    except ValueError as e:
+        print("ERROR: " + repr(e))
+        exit()
 
 def InstallAppAndCreateToken(config, port=0):
     """
