@@ -38,7 +38,8 @@ Run the following command to install the Python packages used for OAUTH:
 **Alternative using `git`**:
 
   1. Clone this repo : https://github.com/HubSpot/oauth-quickstart-python.git
-  2. Create a `.env` file to store `CLIENT_ID` and `CLIENT_SECRET`.
+  2. Create a new `.env` file in the same directory as `quickstart.py`.
+  3. Add your `CLIENT_ID` and `CLIENT_SECRET` to `.env`
 
 ## Step 4: Run your app
 
