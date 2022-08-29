@@ -23,7 +23,7 @@ CLIENT_ID     = 'your-app-client-id'
 CLIENT_SECRET = 'your-app-client-secret'
 
 # If modifying these scopes, delete the file hstoken.pickle.
-SCOPES        = ['contacts']
+SCOPES        = ['crm.objects.contacts.read']
 
 #================================================================
 #==== QuickStart Command-line App

@@ -55,7 +55,7 @@ Run your app with the following command:
 ## Try this next...
 
 * Get multiple records -- Update the `count` param in your request to fetch up to 100 records.
-* Create a Contact -- Via `.post` and the [Create or Update a Contact API](https://developers.hubspot.com/docs/methods/contacts/create_or_update).
+* Create a Contact -- Via `.post`, the [Create or Update a Contact API](https://developers.hubspot.com/docs/methods/contacts/create_or_update) and the `crm.objects.contacts.write` scope
 * Create and update multiple Contacts at once -- Via the [Contacts Batch API](https://developers.hubspot.com/docs/methods/contacts/batch_create_or_update).
 * Work with other APIs -- Update the request method (`.get` vs. `.post`) URL, parameters, and [auth scopes](https://developers.hubspot.com/docs/methods/oauth2/initiate-oauth-integration#scopes) (if needed).
 
@@ -77,7 +77,7 @@ CLIENT_ID     = 'your-app-client-id'
 CLIENT_SECRET = 'your-app-client-secret'
 
 # If modifying these scopes, delete the file hstoken.pickle.
-SCOPES        = ['contacts']
+SCOPES        = ['crm.objects.contacts.read']
 
 #================================================================
 #==== QuickStart Command-line App
