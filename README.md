@@ -27,13 +27,19 @@ Now that you have your App Name, Client ID, and Client Secret, you can setup the
 
 Run the following command to install the Python packages used for OAUTH:
 
-    $ pip install --upgrade requests_oauthlib
+    $ pip install --upgrade requests_oauthlib python-dotenv
 
 ## Step 3: Set up your QuickStart App
 
   1. Create a file named `quickstart.py` in your working directory
   2. Copy in the [QuickStart Sample App](#hubspot-quickstart-sample-app---view-in-git) code below.
   3. Update `CLIENT_ID` and `CLIENT_SECRET` with your App's ID and Secret from Step 1.
+
+**Alternative using `git`**:
+
+  1. Clone this repo : https://github.com/HubSpot/oauth-quickstart-python.git
+  2. Create a new `.env` file in the same directory as `quickstart.py`.
+  3. Add your `CLIENT_ID` and `CLIENT_SECRET` to `.env`
 
 ## Step 4: Run your app
 
@@ -72,9 +78,9 @@ import os
 import pickle
 import json
 
-# Replace with your App's Client ID and Secret
-CLIENT_ID     = 'your-app-client-id'
-CLIENT_SECRET = 'your-app-client-secret'
+# Add your App's credentials:
+CLIENT_ID     = None # Replace with 'your-app-client-id'
+CLIENT_SECRET = None # Replace with 'your-app-client-secret'
 
 # If modifying these scopes, delete the file hstoken.pickle.
 SCOPES        = ['crm.objects.contacts.read']
@@ -87,6 +93,10 @@ def main():
     Connects your app a Hub, then fetches the first Contact in the CRM.
     Note: If you want to change hubs or scopes, delete the `hstoken.pickle` file and rerun.
     """
+    
+    # Check if Client ID and Secret are set
+    VerifyAppSettings()
+
     app_config = {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,
@@ -129,6 +139,18 @@ def main():
     
 #===================================================================
 #==== Supporting Functions and Classes used by the command-line app. 
+
+def VerifyAppSettings():
+    """
+    Check if CLIENT_ID and CLIENT_SECRET are set.
+    If not, present the error and exit().
+    """
+    try:
+        if not (CLIENT_ID and CLIENT_SECRET):
+            raise ValueError("CLIENT_ID or CLIENT_SECRET empty.  Check your .env file or set values in quickstart.py directly.")
+    except ValueError as e:
+        print("ERROR: " + repr(e))
+        exit()
 
 def InstallAppAndCreateToken(config, port=0):
     """
